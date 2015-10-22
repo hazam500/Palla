@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Palla</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="nombre_completo">Nombre completo</string>
+    <string name="nombre_hint">Nombre y apellido</string>
+    <string name="email">Teléfono o email</string>
+    <string name="hint_email">ejemplo@empresa.com</string>
+    <string name="usuario">Nombre de usuario</string>
+    <string name="hint_usuario">Tu nombre de usuario</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="hint_contraseña">Tu contraseña</string>
+    <string name="title_activity_iniciar_sesion">IniciarSesion</string>
+    <string name="crea_cuenta">Crea tu cuenta</string>
+    <string name="ingresa_destino">Escriba la dirección de destino</string>
+    <string name="hint_destino">Ej: carrera 123 #123-45</string>
+    <string name="localizar_destino">Localizar destino</string>
+    <string name="service_not_available">Sorry, the service is not available</string>
+
+
+
+</resources>
