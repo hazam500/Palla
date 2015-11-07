@@ -6,19 +6,11 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * An {@link IntentService} subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
- * <p/>
- * TODO: Customize class - update intent actions, extra parameters and static
- * helper methods.
- */
 public class DestinoIntentService extends IntentService {
 
 
@@ -38,8 +30,6 @@ public class DestinoIntentService extends IntentService {
             mReceiver = intent.getParcelableExtra("receiver");
 
             String location = intent.getStringExtra("direccion");
-
-            Log.e("lugar", location);
 
             locationAmpliada = location + ",Bogota";
 
@@ -65,27 +55,7 @@ public class DestinoIntentService extends IntentService {
             double latitude = address.getLatitude();
             double longitude = address.getLongitude();
 
-            if(addresses.size()==2 || addresses.size()==3 ) {
-                Address address2 = addresses.get(1);
-                Address address3 = addresses.get(2);
-
-                double latitude2 = address2.getLatitude();
-                double longitude2 = address2.getLongitude();
-
-                double latitude3 = address3.getLatitude();
-                double longitude3 = address3.getLongitude();
-
-                Log.e("lat", String.valueOf(latitude2));
-                Log.e("long", String.valueOf(longitude2));
-
-                Log.e("lat", String.valueOf(latitude3));
-                Log.e("long", String.valueOf(longitude3));
-            }
-
             Bundle bundle = new Bundle();
-
-
-
             bundle.putDouble("Latitud", latitude);
             bundle.putDouble("Longitud", longitude);
             mReceiver.send(0, bundle);

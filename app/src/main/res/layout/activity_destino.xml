@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.android.palla.DestinoActivity"
-    android:orientation="vertical">
+    tools:context="com.example.android.palla.DestinoActivity">
 
-    <TextView
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/ingresa_destino"
-        android:textSize="20dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_destino"
-        android:textSize="20dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/destinoEdiTtext"/>
+        <EditText
+            android:id="@+id/destinoEdiTtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/hint_destino"
+            android:textSize="20dp" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="localizarDestino"
         android:text="@string/localizar_destino"
-        android:textSize="20dp"
-        android:onClick="localizarDestino"/>
+        android:id="@+id/localizar_destino"
+        android:textSize="20dp" />
 
-    <TextView
+    <Button
+        android:id="@+id/confirmaDestino"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/longitudTextView"/>
+        android:layout_alignBottom="@+id/map"
+        android:onClick="confirmarDestino"
+        android:text="Confirma el destino"
+        android:visibility="gone"/>
 
-    <TextView
+    <Button
+        android:id="@+id/ubicacionActual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/latitudTextView"/>
+        android:layout_alignBottom="@+id/map"
+        android:onClick="confirmarOrigen"
+        android:text="Confirma tu ubicación actual"
+        android:visibility="gone" />
 
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/map"
         class="com.google.android.gms.maps.SupportMapFragment"
- />
-
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
