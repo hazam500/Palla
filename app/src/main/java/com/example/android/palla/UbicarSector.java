@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +31,7 @@ public class UbicarSector extends FragmentActivity {
     private LatLng destino;
     private String key;
     private int sectorDestino;
+    private long cantidadPasajeros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +104,31 @@ public class UbicarSector extends FragmentActivity {
 
             if (resultadoOrigen.equals(true)) {
                 GeoFire sectorOrigenGeofire = new GeoFire(new Firebase("https://brilliant-heat-7882.firebaseio.com/SectoresOrigenLocalizacion/").child(String.valueOf(sectorDestino)).child(String.valueOf(j + 1)).child(key));
-                sectorOrigenGeofire.setLocation("key",new GeoLocation(ubicacionOrigen.latitude,ubicacionOrigen.longitude));
+                sectorOrigenGeofire.setLocation("key", new GeoLocation(ubicacionOrigen.latitude, ubicacionOrigen.longitude));
+
+                final Firebase sectorDestinoFirebaseSize = new Firebase("https://brilliant-heat-7882.firebaseio.com/SectoresDestino/").child(String.valueOf(sectorDestino)).child(String.valueOf(j + 1));
+                sectorDestinoFirebaseSize.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            cantidadPasajeros = dataSnapshot.getChildrenCount();
+                            sectorDestinoFirebaseSize.child("size").setValue(cantidadPasajeros + 1);
+                        } else {
+                            sectorDestinoFirebaseSize.child("size").setValue(1);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                });
                 Firebase sectorDestinoFirebase = new Firebase("https://brilliant-heat-7882.firebaseio.com/SectoresDestino/").child(String.valueOf(sectorDestino)).child(String.valueOf(j + 1)).child(key);
-                sectorDestinoFirebase.setValue(new PasajeroSector(System.currentTimeMillis())); }
+                sectorDestinoFirebase.setValue(new PasajeroSector(System.currentTimeMillis()));
+
+
+            }
         }
 
         finish();
